@@ -1,5 +1,5 @@
 # Pull base image
-FROM  node:9-alpine
+FROM  node:10-alpine
 
 # Install the magic wrapper.
 ADD ./wrapdocker /usr/local/bin/wrapdocker
