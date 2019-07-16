@@ -1,8 +1,8 @@
-# Pull base image
+# Pull chome image
 FROM  zenika/alpine-chrome
 
 USER root
-
+# Pull node image
 FROM  node:11.15.0-alpine
 
 USER root
