@@ -1,5 +1,7 @@
 # Pull base image
-FROM  node:11.3.0-alpine
+FROM  zenika/alpine-chrome
+
+FROM  node:11.15.0-alpine
 
 # Install the magic wrapper.
 ADD ./wrapdocker /usr/local/bin/wrapdocker
