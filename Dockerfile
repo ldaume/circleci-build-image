@@ -18,6 +18,8 @@ RUN apk --update add \
   && chmod +x /usr/local/bin/wrapdocker \
   && rm -rf /var/cache/apk/*
 
+USER root
+
 # Define additional metadata for our image.
 VOLUME /var/lib/docker
 ENTRYPOINT ["wrapdocker"]
