@@ -24,6 +24,8 @@ RUN apk --update add \
 
 USER root
 
+RUN npm install cypress -g
+
 # Define additional metadata for our image.
 VOLUME /var/lib/docker
 ENTRYPOINT ["wrapdocker"]
