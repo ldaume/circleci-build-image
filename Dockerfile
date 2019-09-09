@@ -1,5 +1,20 @@
 # Pull base image
-FROM  node:11.3.0-alpine
+FROM  node:12-alpine
+
+# Install npm-check-updates
+RUN npm i -g npm-check-updates
+
+# Install Cypress
+ENV CI=1
+ARG CYPRESS_VERSION="3.4.1"
+
+RUN echo "whoami: $(whoami)"
+RUN npm config -g set user $(whoami)
+RUN npm install -g "cypress@${CYPRESS_VERSION}"
+
+# Cypress cache and installed version
+RUN cypress cache path
+RUN cypress cache list
 
 # Install the magic wrapper.
 ADD ./wrapdocker /usr/local/bin/wrapdocker
