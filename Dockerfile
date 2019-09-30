@@ -1,6 +1,20 @@
 # Pull base image
 FROM  node:12-alpine
 
+# install chromium
+#RUN sed -e 's;^#http\(.*\)/v3.6/community;http\1/v3.6/community;g' -i /etc/apk/repositories
+
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
+    apk --no-cache update && \
+    apk add --no-cache --virtual .build-deps gifsicle pngquant optipng libjpeg-turbo-utils udev ttf-opensans && \
+    apk add --no-cache python alpine-sdk chromium-chromedriver chromium xvfb udev yarn bash iptables ca-certificates openssh-client e2fsprogs docker && \
+    npm cache clean --force && \    
+    rm -rf /var/cache/apk /root/.npm/
+
+ENV DISPLAY=:99 CHROME_BIN=/usr/bin/chromium-browser LIGHTHOUSE_CHROMIUM_PATH=/usr/bin/chromium-browser
+
 # Install npm-check-updates
 RUN npm i -g npm-check-updates
 
@@ -17,19 +31,9 @@ RUN cypress cache path
 RUN cypress cache list
 
 # Install the magic wrapper.
-ADD ./wrapdocker /usr/local/bin/wrapdocker
+ADD ./wrapdocker /usr/local/bin/wrapdocker \
+    && chmod +x /usr/local/bin/wrapdocker  
 
-RUN sed -e 's;^#http\(.*\)/v3.6/community;http\1/v3.6/community;g' -i /etc/apk/repositories
-
-RUN apk --update add \
-  bash \
-  iptables \
-  ca-certificates \
-  openssh-client \
-  e2fsprogs \
-  docker \
-  && chmod +x /usr/local/bin/wrapdocker \
-  && rm -rf /var/cache/apk/*
 
 # Define additional metadata for our image.
 VOLUME /var/lib/docker
