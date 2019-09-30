@@ -31,8 +31,8 @@ RUN cypress cache path
 RUN cypress cache list
 
 # Install the magic wrapper.
-ADD ./wrapdocker /usr/local/bin/wrapdocker \
-    && chmod +x /usr/local/bin/wrapdocker  
+ADD ./wrapdocker /usr/local/bin/wrapdocker 
+RUN chmod +x /usr/local/bin/wrapdocker  
 
 
 # Define additional metadata for our image.
