@@ -20,7 +20,7 @@ RUN npm i -g npm-check-updates
 
 # Install Cypress
 ENV CI=1
-ARG CYPRESS_VERSION="3.4.1"
+ARG CYPRESS_VERSION="4.2.0"
 
 RUN echo "whoami: $(whoami)"
 RUN npm config -g set user $(whoami)
