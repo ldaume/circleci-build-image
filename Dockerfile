@@ -8,7 +8,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk --no-cache update && \
-    apk add --no-cache --virtual .build-deps gifsicle pngquant optipng libjpeg-turbo-utils udev ttf-opensans && \
+    apk add --no-cache --virtual .build-deps gifsicle pngquant optipng git libjpeg-turbo-utils udev ttf-opensans && \
     apk add --no-cache python alpine-sdk chromium-chromedriver chromium xvfb udev yarn bash iptables ca-certificates openssh-client e2fsprogs docker && \
     npm cache clean --force && \    
     rm -rf /var/cache/apk /root/.npm/
